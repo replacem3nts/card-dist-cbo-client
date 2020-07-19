@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 
-export const EditPrescriberForm = ({id, firstname, lastname, tel, email}) => {
-    const [newFirstname, setNewFirstname] = useState(firstname)
-    const [newLastname, setNewLastname] = useState(lastname)
-    const [newTel, setNewTel] = useState(tel)
-    const [newEmail, setNewEmail] = useState(email)
+export const EditPrescriberForm = ({prescriber}) => {
+    const [newFirstname, setNewFirstname] = useState(prescriber.firstname)
+    const [newLastname, setNewLastname] = useState(prescriber.lastname)
+    const [newTel, setNewTel] = useState(prescriber.tel)
+    const [newEmail, setNewEmail] = useState(prescriber.email)
+
+    
 
     return (
         <form>
+            {console.log(prescriber)}
             <label>
                 First Name:
                 <input type='text' name='firstname' value={newFirstname} onChange={(e) => {setNewFirstname(e.target.value)}}/>

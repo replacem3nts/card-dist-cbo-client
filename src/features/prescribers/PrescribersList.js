@@ -18,8 +18,13 @@ const PrescribersList = ({prescribers}) => {
     
     let handleEdit = (id) => {
         let presc = prescribers.find(presc => presc.id === id)
-        console.log(presc)
-        setPrescToEdit(...presc)
+        setPrescToEdit(presc)
+        setDispForm(dispForm => !dispForm)
+    }
+
+    let handleEditReset = (e) => {
+        e.preventDefault()
+        setPrescToEdit(blankPresc)
         setDispForm(dispForm => !dispForm)
     }
 
@@ -46,7 +51,10 @@ const PrescribersList = ({prescribers}) => {
             </section>
             {dispForm 
             ?
-            <EditPrescriberForm prescriber={prescToEdit}/>
+            <>
+                <EditPrescriberForm prescriber={prescToEdit}/>
+                <button onClick={handleEditReset}>Cancel</button>
+            </>
             :
             null
             }
