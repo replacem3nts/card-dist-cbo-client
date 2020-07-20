@@ -6,7 +6,7 @@ import Home from './containers/Home';
 import { SiteHeader } from './components/SiteHeader';
 import { fetchPersistLogin } from './services/Utils';
 import { setCbo } from './features/cbo/cboSlice'
-import { setPrescribers } from './features/prescribers/prescribersSlice'
+import { setPrescribers } from './features/prescribers/PrescribersSlice'
 import { connect } from 'react-redux';
 import PrescribersList from './features/prescribers/PrescribersList';
 

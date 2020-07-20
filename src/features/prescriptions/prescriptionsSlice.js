@@ -8,10 +8,6 @@ const prescriptionsSlice = createSlice({
             const { prescriptions } = action.payload
             state.push(prescriptions)
         },
-        addPrescription(state, action) {
-            const { prescription } = action.payload
-            state.push(prescription)
-        },
         updatePrescription(state, action) {
             const { id, prescription } = action.payload
             let toUpdateInd = state.findIndex(prescription => prescription.id === id)

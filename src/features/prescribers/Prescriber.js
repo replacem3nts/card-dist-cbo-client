@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchDeletePrescriber } from '../../services/Utils'
-import { deletePrescriber } from './prescribersSlice'
+import { deletePrescriber } from './PrescribersSlice'
 
 let mapDispatch = { deletePrescriber }
 

@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import logo from '../logo.svg'
 import Switch from "react-switch";
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 export const SiteHeader = () => {
-    let [eng, setEng] = useState(true)
+    let [eng, setEng] = useState(false)
+    const { t } = useTranslation()
+
+    const changeLanguage = lng => {
+        i18n.changeLanguage(lng)
+    }
+
+    const handleChange = () => {
+        setEng(eng => !eng)
+        eng ? changeLanguage('en') : changeLanguage('sp')
+    }
 
     return (
         <div>
             <img src={logo} className="App-logo" alt="logo" />
-            <h1>Welcome!</h1>
+            <h1>{t('Welcome!')}</h1>
             <Switch
                 checked={eng}
-                onChange={() => setEng(eng => !eng)}
+                onChange={handleChange}
                 className='react-switch'
                 onColor="#ffffff"
                 onHandleColor="#28377E"

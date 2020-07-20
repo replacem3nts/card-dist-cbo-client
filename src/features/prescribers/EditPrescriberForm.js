@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { fetchUpdatePrescriber, fetchAddPrescriber } from '../../services/Utils'
 import { connect } from 'react-redux'
-import { updatePrescriber, addPrescriber } from './prescribersSlice'
+import { updatePrescriber, addPrescriber } from './PrescribersSlice'
 
 let mapDispatch = { updatePrescriber, addPrescriber }
 

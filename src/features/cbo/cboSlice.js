@@ -22,5 +22,5 @@ const cboSlice = createSlice({
     }
 })
 
-export const { setCbo } = cboSlice.actions
+export const { setCbo, removeCbo } = cboSlice.actions
 export default cboSlice.reducer

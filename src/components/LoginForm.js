@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { fetchLogin } from '../services/Utils'
 import { connect } from 'react-redux'
 import { setCbo } from '../features/cbo/cboSlice'
-import { setPrescribers } from '../features/prescribers/prescribersSlice'
+import { setPrescribers } from '../features/prescribers/PrescribersSlice'
 import { useHistory } from 'react-router-dom'
 
 const mapDispatch = { setCbo, setPrescribers }

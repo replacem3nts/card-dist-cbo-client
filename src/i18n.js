@@ -10,7 +10,7 @@ const resources = {
     },
     sp: {
         translation: {
-            'Welcome': '¡Bienvenido!',
+            'Welcome!': '¡Bienvenido!',
             'Password': 'Contraseña'
         }
     }

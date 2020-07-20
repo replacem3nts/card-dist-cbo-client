@@ -3,6 +3,11 @@ import { connect } from 'react-redux'
 import Prescriber from './Prescriber'
 import EditPrescriberForm from './EditPrescriberForm'
 
+
+let mapState = (state) => {
+    return {prescribers: state.prescribers}
+}
+
 const PrescribersList = ({prescribers}) => {
     let blankPresc = {
         id: '',
@@ -63,10 +68,6 @@ const PrescribersList = ({prescribers}) => {
             </section>
         </article>
     )
-}
-
-let mapState = (state) => {
-    return {prescribers: state.prescribers}
 }
 
 export default connect(mapState)(PrescribersList)
