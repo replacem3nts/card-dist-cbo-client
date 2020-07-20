@@ -13,13 +13,13 @@ const prescribersSlice = createSlice({
             state.push(prescriber)
         },
         updatePrescriber(state, action) {
-            const { id, prescriber } = action.payload
-            let toUpdateInd = state.findIndex(prescriber => prescriber.id === id)
+            const { prescriber } = action.payload
+            let toUpdateInd = state.findIndex(pres => pres.id === prescriber.id)
             state.splice(toUpdateInd, 1, prescriber)
         },
         deletePrescriber(state, action) {
             const { id } = action.payload
-            state = state.filter(prescriber => prescriber.id !== id)
+            return state.filter(prescriber => prescriber.id !== id)
         }
     }
 })

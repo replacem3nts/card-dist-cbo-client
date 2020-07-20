@@ -1,33 +1,69 @@
 import React, { useState } from 'react'
+import { fetchUpdatePrescriber, fetchAddPrescriber } from '../../services/Utils'
+import { connect } from 'react-redux'
+import { updatePrescriber, addPrescriber } from './prescribersSlice'
 
-export const EditPrescriberForm = ({prescriber}) => {
-    const [newFirstname, setNewFirstname] = useState(prescriber.firstname)
-    const [newLastname, setNewLastname] = useState(prescriber.lastname)
-    const [newTel, setNewTel] = useState(prescriber.tel)
-    const [newEmail, setNewEmail] = useState(prescriber.email)
+let mapDispatch = { updatePrescriber, addPrescriber }
 
+const EditPrescriberForm = ({prescriber, updatePrescriber, addPrescriber, reset}) => {
+    const [firstname, setFirstname] = useState(prescriber.firstname)
+    const [lastname, setLastname] = useState(prescriber.lastname)
+    const [tel, setTel] = useState(prescriber.tel)
+    const [email, setEmail] = useState(prescriber.email)
+
+    let handleSubmit = (e) => {
+        e.preventDefault()
+        if(prescriber.firstname !== '') {
+            handleUpdate()
+        } else {
+            handleCreate()
+        }
+        
+    }
     
+    let handleUpdate = () => {
+        let newPresc = {id: prescriber.id, firstname, lastname, tel, email}
+        fetchUpdatePrescriber(newPresc, localStorage.token)
+            .then(response => {
+                if(!response.message) {
+                    updatePrescriber(response)
+                    reset()
+                }
+            })
+    }
+
+    let handleCreate = () => {
+        let newPresc = {firstname, lastname, tel, email}
+        fetchAddPrescriber(newPresc, localStorage.token)
+            .then(response => {
+                if(!response.message) {
+                    addPrescriber(response)
+                    reset()
+                }
+            })
+    }
 
     return (
-        <form>
-            {console.log(prescriber)}
+        <form onSubmit={handleSubmit}>
             <label>
                 First Name:
-                <input type='text' name='firstname' value={newFirstname} onChange={(e) => {setNewFirstname(e.target.value)}}/>
+                <input type='text' name='firstname' value={firstname} onChange={(e) => {setFirstname(e.target.value)}}/>
             </label>
             <label>
                 Last Name:
-                <input type='text' name='lastname' value={newLastname} onChange={(e) => {setNewLastname(e.target.value)}}/>
+                <input type='text' name='lastname' value={lastname} onChange={(e) => {setLastname(e.target.value)}}/>
             </label>
             <label>
                 Telephone:
-                <input type='text' name='tel' value={newTel} onChange={(e) => {setNewTel(e.target.value)}}/>
+                <input type='text' name='tel' value={tel} onChange={(e) => {setTel(e.target.value)}}/>
             </label>
             <label>
                 E-mail:
-                <input type='text' name='email' value={newEmail} onChange={(e) => {setNewEmail(e.target.value)}}/>
+                <input type='text' name='email' value={email} onChange={(e) => {setEmail(e.target.value)}}/>
             </label>
             <input type='submit' value='Submit'/>
         </form>
     )
 }
+
+export default connect(null, mapDispatch)(EditPrescriberForm)

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Prescriber } from './Prescriber'
-import { EditPrescriberForm } from './EditPrescriberForm'
+import Prescriber from './Prescriber'
+import EditPrescriberForm from './EditPrescriberForm'
 
 const PrescribersList = ({prescribers}) => {
     let blankPresc = {
@@ -22,8 +22,7 @@ const PrescribersList = ({prescribers}) => {
         setDispForm(dispForm => !dispForm)
     }
 
-    let handleEditReset = (e) => {
-        e.preventDefault()
+    let handleEditReset = () => {
         setPrescToEdit(blankPresc)
         setDispForm(dispForm => !dispForm)
     }
@@ -42,6 +41,8 @@ const PrescribersList = ({prescribers}) => {
                             <th>Last Name</th>
                             <th>Telephone</th>
                             <th>Email</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,17 +50,16 @@ const PrescribersList = ({prescribers}) => {
                     </tbody>
                 </table>
             </section>
-            {dispForm 
-            ?
-            <>
-                <EditPrescriberForm prescriber={prescToEdit}/>
-                <button onClick={handleEditReset}>Cancel</button>
-            </>
-            :
-            null
-            }
             <section>
-
+                {dispForm 
+                ?
+                <>
+                    <EditPrescriberForm prescriber={prescToEdit} reset={handleEditReset}/>
+                    <button onClick={handleEditReset}>Cancel</button>
+                </>
+                :
+                    <button onClick={() => setDispForm(dispForm => !dispForm)}>Add New Prescriber</button>
+                }
             </section>
         </article>
     )

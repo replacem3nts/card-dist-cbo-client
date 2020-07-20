@@ -19,8 +19,31 @@ export const fetchPersistLogin = (token) => {
 export const fetchUpdatePrescriber = (prescriber, token) => {
     return fetch(BACKEND_PRESCRIBERS+`/${prescriber.id}`, {
         method: 'PATCH',
-        headers: {'Authorization': `Bearer ${token}`},
-        body: JSON.stringify({prescriber})
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({...prescriber})
+    })
+        .then(r => r.json())
+}
+
+export const fetchAddPrescriber = (prescriber, token) => {
+    return fetch(BACKEND_PRESCRIBERS, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({...prescriber})
+    })
+        .then(r => r.json())
+}
+
+export const fetchDeletePrescriber = (id, token) => {
+    return fetch(BACKEND_PRESCRIBERS+`/${id}`, {
+        method: 'DELETE',
+        headers: {'Authorization': `Bearer ${token}`}
     })
         .then(r => r.json())
 }

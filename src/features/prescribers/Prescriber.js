@@ -1,13 +1,31 @@
 import React from 'react'
-// {id, firstname, lastname, tel, email}
-export const Prescriber = (props) => {
+import { connect } from 'react-redux'
+import { fetchDeletePrescriber } from '../../services/Utils'
+import { deletePrescriber } from './prescribersSlice'
+
+let mapDispatch = { deletePrescriber }
+
+const Prescriber = ({id, firstname, lastname, tel, email, edit, deletePrescriber}) => {
+
+    let handleDelete = () => {
+        fetchDeletePrescriber(id, localStorage.token)
+            .then(response => {
+                if(!response.message) {
+                    deletePrescriber({id: id})
+                }
+            })
+    }
 
     return (
-        <tr onClick={() => props.edit(props.id)}>
-            <td>{props.firstname}</td>
-            <td>{props.lastname}</td>
-            <td>{props.tel}</td>
-            <td>{props.email}</td>
+        <tr>
+            <td>{firstname}</td>
+            <td>{lastname}</td>
+            <td>{tel}</td>
+            <td>{email}</td>
+            <td><button onClick={() => edit(id)}>Edit</button></td>
+            <td><button onClick={handleDelete} >Delete</button></td>
         </tr>
     )
 }
+
+export default connect(null, mapDispatch)(Prescriber)
