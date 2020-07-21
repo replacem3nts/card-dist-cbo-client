@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import PrescribersList from './features/prescribers/PrescribersList';
 import { setPrescriptions } from './features/prescriptions/PrescriptionsSlice';
 import FilledPrescritionsList from './features/prescriptions/FilledPrescritionsList';
+import { setHcs } from './features/hcs/HcSlice';
 
 class App extends Component {
 
@@ -29,6 +30,7 @@ class App extends Component {
       this.props.dispatch(setCbo({id, name, token}))
       this.props.dispatch(setPrescribers(response.cbo))
       this.props.dispatch(setPrescriptions(response.cbo))
+      this.props.dispatch(setHcs(response.cbo))
     } else {
         localStorage.clear()
       }

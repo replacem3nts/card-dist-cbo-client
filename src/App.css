@@ -2,7 +2,7 @@ table {
   width: 95%;
   max-height: 75%;
   border-collapse: collapse;
-  overflow: scroll;
+  
 }
 
 thead {
@@ -26,8 +26,10 @@ th {
 
 td {
   font-size: 85%;
+  font-weight: 500;
   padding: 0.5rem;
   text-align: left;
+  overflow: auto;
 }
 
 tr:nth-child(odd) {
@@ -55,14 +57,14 @@ tr:nth-child(even) {
 
 .App-header {
   height: 15vh;
-  width: 96%;
+  width: 95vw;
 }
 
 .App-header hr {
   height: 3px;
   border-width: 0;
   background-color: #5067B0;
-  width: 96%;
+  width: 95vw;
 }
 
 .App-header > div {
