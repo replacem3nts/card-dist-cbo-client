@@ -8,6 +8,3 @@ export default combineReducers({
     prescribers: prescribersReducer,
     prescriptions: prescriptionsReducer
 })
-
-// /Users/northernspy/Development/4CT/card-dist-cbo-client/src/reducers
-// /Users/northernspy/Development/4CT/card-dist-cbo-client/src/features/prescribers

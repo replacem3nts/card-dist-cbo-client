@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-import Home from './containers/Home';
-import { SiteHeader } from './components/SiteHeader';
+import SiteHeader from './components/SiteHeader';
 import { fetchPersistLogin } from './services/Utils';
 import { setCbo } from './features/cbo/cboSlice'
 import { setPrescribers } from './features/prescribers/PrescribersSlice'
 import { connect } from 'react-redux';
 import PrescribersList from './features/prescribers/PrescribersList';
+import { setPrescriptions } from './features/prescriptions/PrescriptionsSlice';
+import FilledPrescritionsList from './features/prescriptions/FilledPrescritionsList';
 
 class App extends Component {
 
@@ -27,6 +28,7 @@ class App extends Component {
       let {token} = response
       this.props.dispatch(setCbo({id, name, token}))
       this.props.dispatch(setPrescribers(response.cbo))
+      this.props.dispatch(setPrescriptions(response.cbo))
     } else {
         localStorage.clear()
       }
@@ -34,7 +36,7 @@ class App extends Component {
 
   renderHome = () => {
     if(localStorage.token) {
-      return <Home/>
+      return <FilledPrescritionsList/>
     } else {
       return <LoginForm/>
     }
