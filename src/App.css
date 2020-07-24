@@ -2,7 +2,6 @@ table {
   width: 95%;
   max-height: 75%;
   border-collapse: collapse;
-  
 }
 
 thead {
@@ -98,20 +97,20 @@ tr:nth-child(even) {
   border-radius: 5px;
   width: 95vw;
   margin: 1rem;
-}
-
-.filled {
-  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+}
+
+.filled {
+  height: 60vh;
   overflow: scroll;
 }
 
 .filled-header {
   width: 90%;
-  max-height: 20%;
+  max-height: 5rem;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -123,4 +122,35 @@ tr:nth-child(even) {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.button-styled-link {
+  text-decoration: none;
+  padding: .85rem;
+  color: #1028A7;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border: 3px solid #1028A7;
+}
+
+.distributed-body {
+  width: 90%;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+
+}
+
+.survey-container {
+  background-color: #FFFFFF;
+  border: 3px solid #1028A7;
+  border-radius: 5px;
+  width: 90vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }

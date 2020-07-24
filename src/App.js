@@ -11,6 +11,7 @@ import PrescribersList from './features/prescribers/PrescribersList';
 import { setPrescriptions } from './features/prescriptions/PrescriptionsSlice';
 import FilledPrescritionsList from './features/prescriptions/FilledPrescritionsList';
 import { setHcs } from './features/hcs/HcSlice';
+import RxSurvey from './components/RxSurvey';
 
 class App extends Component {
 
@@ -49,6 +50,12 @@ class App extends Component {
       return <PrescribersList/>
     } 
   }
+  
+  renderFillRx = () => {
+    if(localStorage.token) {
+      return <RxSurvey/>
+    } 
+  }
 
   render() {
     return (
@@ -61,6 +68,7 @@ class App extends Component {
           <Switch>
             <Route path='/' exact render={this.renderHome}/>
             <Route path='/prescribers' exact render={this.renderPrescribers}/>
+            <Route path='/fillrx' exact render={this.renderFillRx}/>
           </Switch>
         </main>
       </div>

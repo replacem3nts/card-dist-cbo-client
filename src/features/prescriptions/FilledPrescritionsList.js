@@ -52,12 +52,14 @@ const FilledPrescritionsList = ({ prescriptions }) => {
             </table>
         </section>
         <section className='display-container'>
-            <header>
+            <header className='filled-header'>
                 <h2>Available Prescriptions</h2>
             </header>
-                <h3>Available: {availNum}</h3>
-                <button>Assign New Rx</button>
-                <Link to='/prescribers'>PRESCRIBERS</Link>
+            <div className='distributed-body'>
+                <h3>Number Available to be Filled: {availNum}</h3>
+                <Link className='button-styled-link' to={`/fillrx`}>Assign New Rx</Link>
+                <Link className='button-styled-link' to='/prescribers'>Manage Prescribers</Link>
+            </div>
         </section>
         </>
     )
