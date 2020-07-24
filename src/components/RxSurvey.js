@@ -21,7 +21,7 @@ const RxSurvey = ({ prescribers }) => {
             <section>
                 <form>
                     <label>
-                        Please select the CBO caseworker who is writing the prescription:
+                        {'Please select the CBO caseworker who is writing the prescription:  '}
                         <select>
                             {prescriberArr}
                         </select>
@@ -31,24 +31,24 @@ const RxSurvey = ({ prescribers }) => {
             <section>
                 <form>
                     <label>
-                        Applicant Phone Number:
-                        <input type='tel'/>
-                    </label><br/>
+                        {'Applicant Phone Number:  '}
+                        <input type='tel' required={true}/>
+                    </label><br/><br/>
                     <label>
-                        Applicant Age:
-                        <input type='number'/>
-                    </label><br/>
+                        {'Applicant Age:  '}
+                        <input type='number' required={true}/>
+                    </label><br/><br/>
                     <label>
-                        Applicant Gender:
-                        <select>
+                        {'Applicant Gender:  '}
+                        <select required={true}>
                             <option>Male</option>
                             <option>Female</option>
                             <option>Prefer Not To Say</option>
                         </select>
-                    </label><br/>
+                    </label><br/><br/>
                     <label>
-                        What is the size of the household?
-                        <select>
+                        {'What is the size of the household?  '}
+                        <select required={true}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -61,73 +61,89 @@ const RxSurvey = ({ prescribers }) => {
                             <option>10</option>
                             <option>11+</option>
                         </select>
-                    </label><br/>
+                    </label><br/><br/>
                     <label>
-                        How many families ive in the household?
-                        <select>
+                        {'How many families ive in the household?  '}
+                        <select required={true}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
                             <option>4</option>
                             <option>5</option>
                         </select>
-                    </label><br/>
+                    </label><br/><br/>
                     <label>
-                        What is the zip code for the Primary Applicant's household?
-                        <input type='text'/>
-                    </label><br/>
+                        {"What is the zip code for the Primary Applicant's household?  "}
+                        <input type='text' required={true}/>
+                    </label><br/><br/>
                     <label>
-                        Does the applicant live with an immediate family member (spouse or partner) who has a  different immigration status?
-                        <select>
+                        {'Does the applicant live with an immediate family member (spouse or partner) who has a  different immigration status?  '}
+                        <select required={true}>
                             <option>Yes</option>
                             <option>No</option>
                             <option>Maybe</option>
                         </select>
-                    </label><br/>
+                    </label><br/><br/>
                     <label>
-                        How will the Primary Applicant/household use the money?
-                        <select>
-                            <option>Yes</option>
-                            <option>No</option>
-                            <option>Maybe</option>
-                        </select>
-                    </label><br/>
-                    <label>
-                        What is the preferred language of the applicant??
-                        <select>
+                        {'What is the preferred language of the applicant?  '}
+                        <select required={true}>
                             <option>English</option>
                             <option>Spanish</option>
                             <option>Portuguese</option>
                             <option>French</option>
                             <option>Arabic</option>
                         </select>
-                    </label><br/>
+                    </label><br/><br/>
+                    {'How will the Primary Applicant/household use the money?  '}<br/>
                     <label>
-                        Has anyone in the household experienced any of the following impacts of COVID-19?
-                        <select>
-                            <option>English</option>
-                            <option>Spanish</option>
-                            <option>Portuguese</option>
-                            <option>French</option>
-                            <option>Arabic</option>
-                        </select>
-                    </label><br/>
-                    Where do you/your family most often see a doctor now?<br/>
-                    <label>
+                    <input type='checkbox'/>
                         Option 1
-                        <input type='checkbox'/>
                     </label><br/>
                     <label>
+                        <input type='checkbox'/>
                         Option 2
-                        <input type='checkbox'/>
                     </label><br/>
                     <label>
+                        <input type='checkbox'/>
                         Option 3
-                        <input type='checkbox'/>
                     </label><br/>
                     <label>
-                        Option 4
                         <input type='checkbox'/>
+                        Option 4
+                    </label><br/><br/>
+                    {'Has anyone in the household experienced any of the following impacts of COVID-19?  '}<br/>
+                    <label>
+                    <input type='checkbox'/>
+                        Option 1
+                    </label><br/>
+                    <label>
+                        <input type='checkbox'/>
+                        Option 2
+                    </label><br/>
+                    <label>
+                        <input type='checkbox'/>
+                        Option 3
+                    </label><br/>
+                    <label>
+                        <input type='checkbox'/>
+                        Option 4
+                    </label><br/><br/>
+                    {'Where do you/your family most often see a doctor now?  '}<br/>
+                    <label>
+                        <input type='checkbox'/>
+                        Option 1
+                    </label><br/>
+                    <label>
+                        <input type='checkbox'/>
+                        Option 2
+                    </label><br/>
+                    <label>
+                        <input type='checkbox'/>
+                        Option 3
+                    </label><br/>
+                    <label>
+                        <input type='checkbox'/>
+                        Option 4
                     </label><br/>
                 </form>
             </section>
