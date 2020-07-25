@@ -46,4 +46,10 @@ export const fetchDeletePrescriber = (id, token) => {
         headers: {'Authorization': `Bearer ${token}`}
     })
         .then(r => r.json())
+    }
+    
+export const fetchConstants = () => {
+        return fetch(BACKEND_CBOS+`/constants`)
+            .then(r => r.json())
+
 }

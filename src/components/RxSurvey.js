@@ -5,11 +5,14 @@ import { useTranslation } from 'react-i18next';
 let mapState = (state) => {
     return {
         prescribers: state.prescribers,
-        hcs: state.hcs
+        hcs: state.hcs,
+        covidimpacts: state.covidimpacts,
+        doctorvisits: state.doctorvisits,
+        funduses: state.funduses
     }
 }
 
-const RxSurvey = ({ prescribers, hcs }) => {
+const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) => {
     const { t } = useTranslation()
 
     // Below here are all the inputs needed to update the 'Rx' model
@@ -29,12 +32,40 @@ const RxSurvey = ({ prescribers, hcs }) => {
     return <option key={presc.id} value={presc.id}>{presc.firstname} {presc.lastname}</option>
     })
 
+    const covidimpactArr = covidimpacts.map(ci => {
+        return (
+            <label key={ci.id}>
+                <input type='checkbox' value={ci.id}/>
+                {ci.kind}
+            </label>
+            )
+        })
+        
+    const doctorvisitArr = doctorvisits.map(dv => {
+        return (
+            <label key={dv.id}>
+                <input type='checkbox' value={dv.id}/>
+                {dv.kind}
+            </label>
+            )
+        })
+        
+    const funduseArr = funduses.map(fu => {
+        return (
+            <label key={fu.id}>
+                <input type='checkbox' value={fu.id}/>
+                {t(`${fu.kind}`)}
+            </label>
+            )
+        })
+
+
+
     // const useOfFunds = ['Food', 'Housing', 'Medication', 'Childcare', 'Utilities', 'Transportation', 'Education', 'Clothes / Items for Babies & Children']
 
     
     return (
         <article className='survey-container'>
-            {console.log(hcId)}
             <header>
                 <h2>4-CT Card Prescription Request</h2>
                 <p>{t('survey instructions')}</p> 
@@ -111,62 +142,17 @@ const RxSurvey = ({ prescribers, hcs }) => {
                     <p>{t('use of funds disclaimer')}</p>
                     <div className='survey-section'>
                         {t('use of funds question')}
-                        <label>
-                        <input type='checkbox'/>
-                            Option 1
-                        </label>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 2
-                        </label>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 3
-                        </label>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 4
-                        </label>
+                        {funduseArr}
                     </div><br/>
                     <h3>4. COVID-19 Impacts:</h3>
                     <div className='survey-section'>
                         {'Has anyone in the household experienced any of the following impacts of COVID-19?  '}<br/>
-                        <label>
-                        <input type='checkbox'/>
-                            Option 1
-                        </label><br/>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 2
-                        </label><br/>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 3
-                        </label><br/>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 4
-                        </label>
+                        {covidimpactArr}
                     </div><br/>
                     <h3>5. Healthcare Interactions:</h3>
                     <div className='survey-section'>
                         {'Where do you/your family most often see a doctor now?  '}<br/>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 1
-                        </label><br/>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 2
-                        </label><br/>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 3
-                        </label><br/>
-                        <label>
-                            <input type='checkbox'/>
-                            Option 4
-                        </label><br/>
+                        {doctorvisitArr}
                     </div>
                     <input type='submit' value='Submit'/>
                 </form>

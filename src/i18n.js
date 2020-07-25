@@ -23,6 +23,15 @@ const resources = {
             'use of funds': '3. Use of Funds:',
             'use of funds disclaimer': 'This is just a best guess, distribution of the card will not be affected by these answers.  ',
             'use of funds question': 'How will the applicant/household use the money? Please select all that apply:  ',
+            'Food': 'Food',
+            'Housing': 'Housing',
+            'Medicine': 'Medicine',
+            'Childcare': 'Childcare',
+            'Utilities': 'Utilities',
+            'Transportation': 'Transportation',
+            'Education': 'Education',
+            'Clothing': 'Clothing',
+            'Other': 'Other',
         }
     },
     sp: {
@@ -46,7 +55,15 @@ const resources = {
             'use of funds': '3. El Uso del Dinero:',
             'use of funds disclaimer': 'Esta es solo una suposición y la tarjeta no será restringida por estas respuestas.',
             'use of funds question': '¿Para qué usará el solicitante/su lugar de domicilio el dinero? Por favor indique todas las categorías que apliquen:  ',
-
+            'Food': 'Los Alimentos',
+            'Housing': 'Las Viviendas',
+            'Medicine': 'Las Medicinas',
+            'Childcare': 'El Cuidado de los Niños',
+            'Utilities': 'Los Servicios Públicos',
+            'Transportation': 'El Transporte',
+            'Education': 'La Educación',
+            'Clothing': 'La Ropa',
+            'Other': 'Otra',
         }
     }
 }
