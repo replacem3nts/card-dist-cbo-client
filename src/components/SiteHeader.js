@@ -67,7 +67,7 @@ const SiteHeader = ({ cboName, removeCbo }) => {
                             paddingRight: 2
                         }}
                         >
-                        SP
+                        EN
                         </div>
                     }
                     checkedIcon={
@@ -83,7 +83,7 @@ const SiteHeader = ({ cboName, removeCbo }) => {
                             paddingRight: 2
                         }}
                         >
-                        EN
+                        SP
                         </div>
                     }
                 />

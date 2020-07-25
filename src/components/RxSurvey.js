@@ -1,150 +1,186 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useTranslation } from 'react-i18next';
 
 let mapState = (state) => {
-    return {prescribers: state.prescribers}
+    return {
+        prescribers: state.prescribers,
+        hcs: state.hcs
+    }
 }
 
-const RxSurvey = ({ prescribers }) => {
-    const [state, setstate] = useState('')
+const RxSurvey = ({ prescribers, hcs }) => {
+    const { t } = useTranslation()
+    const [tel, setTel] = useState('')
+    const [language, setLanguage] = useState('English')
+    // const [prescriber, setPrescriber] = useState('')
+    
+    const filteredHcs = hcs.filter(hc => hc.name !== "DEFAULT HC")
+    const hcArr = filteredHcs.map(hc => {
+        return <option key={hc.id} value={hc.id}>{hc.name}</option>
+    })
 
     const prescriberArr = prescribers.map(presc => {
     return <option key={presc.id} value={presc.id}>{presc.firstname} {presc.lastname}</option>
     })
 
+    // const useOfFunds = ['Food', 'Housing', 'Medication', 'Childcare', 'Utilities', 'Transportation', 'Education', 'Clothes / Items for Babies & Children']
+
+
     return (
         <article className='survey-container'>
+            {/* {console.log(prescriber)} */}
             <header>
                 <h2>4-CT Card Prescription Request</h2>
-                <p>If you are an approved prescriber, fill out this form to write a "prescription" for an individual to receive cash assistance.</p> 
+                <p>{t('survey instructions')}</p> 
             </header>
             <section>
                 <form>
                     <label>
-                        {'Please select the CBO caseworker who is writing the prescription:  '}
+                        <h4>{t('select prescriber')}</h4>
                         <select>
                             {prescriberArr}
                         </select>
-                    </label>
-                </form>
-            </section>
-            <section>
-                <form>
-                    <label>
-                        {'Applicant Phone Number:  '}
-                        <input type='tel' required={true}/>
                     </label><br/><br/>
                     <label>
-                        {'Applicant Age:  '}
-                        <input type='number' required={true}/>
-                    </label><br/><br/>
-                    <label>
-                        {'Applicant Gender:  '}
-                        <select required={true}>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Prefer Not To Say</option>
+                        <h4>{t('select health center')}</h4>
+                        <select>
+                            {hcArr}
                         </select>
                     </label><br/><br/>
-                    <label>
-                        {'What is the size of the household?  '}
-                        <select required={true}>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11+</option>
-                        </select>
-                    </label><br/><br/>
-                    <label>
-                        {'How many families ive in the household?  '}
-                        <select required={true}>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </label><br/><br/>
-                    <label>
-                        {"What is the zip code for the Primary Applicant's household?  "}
-                        <input type='text' required={true}/>
-                    </label><br/><br/>
-                    <label>
-                        {'Does the applicant live with an immediate family member (spouse or partner) who has a  different immigration status?  '}
-                        <select required={true}>
-                            <option>Yes</option>
-                            <option>No</option>
-                            <option>Maybe</option>
-                        </select>
-                    </label><br/><br/>
-                    <label>
-                        {'What is the preferred language of the applicant?  '}
-                        <select required={true}>
-                            <option>English</option>
-                            <option>Spanish</option>
-                            <option>Portuguese</option>
-                            <option>French</option>
-                            <option>Arabic</option>
-                        </select>
-                    </label><br/><br/>
-                    {'How will the Primary Applicant/household use the money?  '}<br/>
-                    <label>
-                    <input type='checkbox'/>
-                        Option 1
-                    </label><br/>
-                    <label>
+                        <h3>{t('applicant info')}</h3>
+                        <p>{t('applicant description')}</p>
+                    <div className='survey-section'>
+                        <label>
+                            {t('applicant phone')}
+                            <input type='tel' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required={true} value={tel} onChange={(e) => setTel(e.target.value)}/>
+                        </label>
+                        <label>
+                            {t('applicant age')}
+                            <input type='number' required={true}/>
+                        </label>
+                        <label>
+                            {t('applicant gender')}
+                            <select required={true}>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Prefer Not To Say</option>
+                            </select>
+                        </label>
+                        <label>
+                            {t('applicant language')}
+                            <select required={true} value={language} onChange={(e) => setLanguage(e.target.value)}>
+                                <option>English</option>
+                                <option>Spanish</option>
+                                <option>Portuguese</option>
+                                <option>French</option>
+                                <option>Arabic</option>
+                            </select>
+                        </label>
+                    </div><br/>
+                    <h3>{t('household info')}</h3>
+                    <div className='survey-section'>
+                        <label>
+                            {'What is the size of the household?  '}
+                            <select required={true}>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11+</option>
+                            </select>
+                        </label>
+                        <label>
+                            {t('household families')}
+                            <select required={true}>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </label>
+                        <label>
+                            {t('household zipcode')}
+                            <input type='text' required={true}/>
+                        </label>
+                        <label>
+                            {t('household spousal status')}
+                            <select required={true}>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option>Maybe</option>
+                            </select>
+                        </label>
+                    </div><br/>
+                    <h3>{t('use of funds')}</h3>
+                    <p>{t('use of funds disclaimer')}</p>
+                    <div className='survey-section'>
+                        {t('use of funds question')}
+                        <label>
                         <input type='checkbox'/>
-                        Option 2
-                    </label><br/>
-                    <label>
+                            Option 1
+                        </label>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 2
+                        </label>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 3
+                        </label>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 4
+                        </label>
+                    </div><br/>
+                    <h3>4. COVID-19 Impacts:</h3>
+                    <div className='survey-section'>
+                        {'Has anyone in the household experienced any of the following impacts of COVID-19?  '}<br/>
+                        <label>
                         <input type='checkbox'/>
-                        Option 3
-                    </label><br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 4
-                    </label><br/><br/>
-                    {'Has anyone in the household experienced any of the following impacts of COVID-19?  '}<br/>
-                    <label>
-                    <input type='checkbox'/>
-                        Option 1
-                    </label><br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 2
-                    </label><br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 3
-                    </label><br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 4
-                    </label><br/><br/>
-                    {'Where do you/your family most often see a doctor now?  '}<br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 1
-                    </label><br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 2
-                    </label><br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 3
-                    </label><br/>
-                    <label>
-                        <input type='checkbox'/>
-                        Option 4
-                    </label><br/>
+                            Option 1
+                        </label><br/>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 2
+                        </label><br/>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 3
+                        </label><br/>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 4
+                        </label>
+                    </div><br/>
+                    <h3>5. Healthcare Interactions:</h3>
+                    <div className='survey-section'>
+                        {'Where do you/your family most often see a doctor now?  '}<br/>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 1
+                        </label><br/>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 2
+                        </label><br/>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 3
+                        </label><br/>
+                        <label>
+                            <input type='checkbox'/>
+                            Option 4
+                        </label><br/>
+                    </div>
+                    <input type='submit' value='Submit'/>
                 </form>
             </section>
         </article>
