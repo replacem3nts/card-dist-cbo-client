@@ -11,10 +11,15 @@ let mapState = (state) => {
 
 const RxSurvey = ({ prescribers, hcs }) => {
     const { t } = useTranslation()
+
+    // Below here are all the inputs needed to update the 'Rx' model
     const [tel, setTel] = useState('')
     const [language, setLanguage] = useState('English')
-    // const [prescriber, setPrescriber] = useState('')
+    const [prescriberId, setPrescriberId] = useState('')
+    const [hcId, setHcId] = useState('')
     
+    // Below here are all the fields needed to update the 'Rx' model
+
     const filteredHcs = hcs.filter(hc => hc.name !== "DEFAULT HC")
     const hcArr = filteredHcs.map(hc => {
         return <option key={hc.id} value={hc.id}>{hc.name}</option>
@@ -26,10 +31,10 @@ const RxSurvey = ({ prescribers, hcs }) => {
 
     // const useOfFunds = ['Food', 'Housing', 'Medication', 'Childcare', 'Utilities', 'Transportation', 'Education', 'Clothes / Items for Babies & Children']
 
-
+    
     return (
         <article className='survey-container'>
-            {/* {console.log(prescriber)} */}
+            {console.log(hcId)}
             <header>
                 <h2>4-CT Card Prescription Request</h2>
                 <p>{t('survey instructions')}</p> 
@@ -38,14 +43,15 @@ const RxSurvey = ({ prescribers, hcs }) => {
                 <form>
                     <label>
                         <h4>{t('select prescriber')}</h4>
-                        <select>
+                        <select defaultValue={'DEFAULT'} onChange={(e) => setPrescriberId(e.target.value)}>
+                            <option value='DEFAULT' disabled>---------------</option>
                             {prescriberArr}
                         </select>
                     </label><br/><br/>
                     <label>
                         <h4>{t('select health center')}</h4>
-                        <select>
-                            {hcArr}
+                        <select defaultValue={'DEFAULT'} onChange={(e) => setHcId(e.target.value)}>
+                            <option value='DEFAULT' disabled>---------------</option>                            {hcArr}
                         </select>
                     </label><br/><br/>
                         <h3>{t('applicant info')}</h3>
@@ -81,30 +87,12 @@ const RxSurvey = ({ prescribers, hcs }) => {
                     <h3>{t('household info')}</h3>
                     <div className='survey-section'>
                         <label>
-                            {'What is the size of the household?  '}
-                            <select required={true}>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11+</option>
-                            </select>
+                            {t('household size')}
+                            <input type='number' required={true}/>
                         </label>
                         <label>
                             {t('household families')}
-                            <select required={true}>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            <input type='number' required={true}/>
                         </label>
                         <label>
                             {t('household zipcode')}
