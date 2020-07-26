@@ -6,6 +6,12 @@ const covidImpactsSlice = createSlice({
     reducers: {
         setCovidImpacts(state, action) {
             const { covidimpacts } = action.payload
+            // let convertedToInts = covidimpacts.map(ci => {
+            //     return {
+            //         id: ci.id.to_s,
+            //         kind: kind
+            //     }
+            // })
             state.push(...covidimpacts)
         },
         removeCovidImpacts(state) {

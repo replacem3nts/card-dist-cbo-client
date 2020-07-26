@@ -15,57 +15,91 @@ let mapState = (state) => {
 const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) => {
     const { t } = useTranslation()
 
-    // Below here are all the inputs needed to update the 'Rx' model
+    // Below are the inputs needed to update an instance of the 'Rx' model
     const [tel, setTel] = useState('')
     const [language, setLanguage] = useState('English')
     const [prescriberId, setPrescriberId] = useState('')
     const [hcId, setHcId] = useState('')
     
-    // Below here are all the fields needed to update the 'Rx' model
+    // Below are the fields needed to create an instance of the 'Survey' model
+    const [age, setAge] = useState('')
+    const [gender, setGender] = useState('Male')
+    const [hhsize, setHhsize] = useState('')
+    const [hhfamilies, setHhfamilies] = useState('')
+    const [zipcode, setZipcode] = useState('')
+    const [mixedstatus, setMixedstatus] = useState('Yes')
+    const [covidImps, setCovidImps] = useState([])
+    const [drVisits, setDrVisits] = useState([])
+    const [funds, setFunds] = useState([])
+
+    // Below create the select options for prescribers and healthcare institutions
+    const prescriberArr = prescribers.map(presc => {
+    return <option key={presc.id} value={presc.id}>{presc.firstname} {presc.lastname}</option>
+    })
 
     const filteredHcs = hcs.filter(hc => hc.name !== "DEFAULT HC")
     const hcArr = filteredHcs.map(hc => {
         return <option key={hc.id} value={hc.id}>{hc.name}</option>
     })
 
-    const prescriberArr = prescribers.map(presc => {
-    return <option key={presc.id} value={presc.id}>{presc.firstname} {presc.lastname}</option>
-    })
+    // Below create the checkbox inputs and form controls for COVID Impacts, Doctor Visits and Fund Uses
+    let handleCovid = (e) => {
+        let { value } = e.target
+        if(covidImps.find(ci => ci === value)){
+            setCovidImps(covidImps => covidImps.filter(id => id !== value))
+        } else {
+            setCovidImps(covidImps => [...covidImps, value])
+        }
+    }
 
     const covidimpactArr = covidimpacts.map(ci => {
         return (
             <label key={ci.id}>
-                <input type='checkbox' value={ci.id}/>
+                <input type='checkbox' checked={covidImps.find(covimp => covimp === ci.id)} value={ci.id} onClick={(e) => handleCovid(e)}/>
                 {ci.kind}
             </label>
             )
         })
-        
+
+    let handleDoctor = (e) => {
+        let { value } = e.target
+        if(drVisits.find(dv => dv === value)){
+            setDrVisits(drVisits => drVisits.filter(id => id !== value))
+        } else {
+            setDrVisits(drVisits => [...drVisits, value])
+        }
+    }
+            
     const doctorvisitArr = doctorvisits.map(dv => {
         return (
             <label key={dv.id}>
-                <input type='checkbox' value={dv.id}/>
+                <input type='checkbox' checked={drVisits.find(drVisit => drVisit === dv.id)} value={dv.id} onClick={(e) => handleDoctor(e)}/>
                 {dv.kind}
             </label>
             )
         })
-        
+
+    let handleFund = (e) => {
+        let { value } = e.target
+        if(funds.find(fu => fu === value)){
+            setFunds(funds => funds.filter(id => id !== value))
+        } else {
+            setFunds(funds => [...funds, value])
+        }
+    }
+            
     const funduseArr = funduses.map(fu => {
         return (
             <label key={fu.id}>
-                <input type='checkbox' value={fu.id}/>
+                <input type='checkbox' checked={funds.find(use => use === fu.id)} value={fu.id} onClick={(e) => handleFund(e)}/>
                 {t(`${fu.kind}`)}
             </label>
             )
         })
 
-
-
-    // const useOfFunds = ['Food', 'Housing', 'Medication', 'Childcare', 'Utilities', 'Transportation', 'Education', 'Clothes / Items for Babies & Children']
-
-    
     return (
         <article className='survey-container'>
+            {console.log(age)}
             <header>
                 <h2>4-CT Card Prescription Request</h2>
                 <p>{t('survey instructions')}</p> 
@@ -74,15 +108,16 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
                 <form>
                     <label>
                         <h4>{t('select prescriber')}</h4>
-                        <select defaultValue={'DEFAULT'} onChange={(e) => setPrescriberId(e.target.value)}>
+                        <select defaultValue={'DEFAULT'} onChange={(e) => setPrescriberId(e.target.value)} required={true}>
                             <option value='DEFAULT' disabled>---------------</option>
                             {prescriberArr}
                         </select>
                     </label><br/><br/>
                     <label>
                         <h4>{t('select health center')}</h4>
-                        <select defaultValue={'DEFAULT'} onChange={(e) => setHcId(e.target.value)}>
-                            <option value='DEFAULT' disabled>---------------</option>                            {hcArr}
+                        <select defaultValue={'DEFAULT'} onChange={(e) => setHcId(e.target.value)} required={true}>
+                            <option value='DEFAULT' disabled>---------------</option>
+                            {hcArr}
                         </select>
                     </label><br/><br/>
                         <h3>{t('applicant info')}</h3>
@@ -94,11 +129,11 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
                         </label>
                         <label>
                             {t('applicant age')}
-                            <input type='number' required={true}/>
+                            <input type='number' value={age} required={true} onChange={(e) => setAge(e.target.value)}/>
                         </label>
                         <label>
                             {t('applicant gender')}
-                            <select required={true}>
+                            <select required={true} value={gender} onChange={(e) => setGender(e.target.value)}>
                                 <option>Male</option>
                                 <option>Female</option>
                                 <option>Prefer Not To Say</option>
@@ -106,7 +141,7 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
                         </label>
                         <label>
                             {t('applicant language')}
-                            <select required={true} value={language} onChange={(e) => setLanguage(e.target.value)}>
+                            <select value={language} onChange={(e) => setLanguage(e.target.value)} required={true}>
                                 <option>English</option>
                                 <option>Spanish</option>
                                 <option>Portuguese</option>
@@ -119,19 +154,19 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
                     <div className='survey-section'>
                         <label>
                             {t('household size')}
-                            <input type='number' required={true}/>
+                            <input type='number' value={hhsize} onChange={(e) => setHhsize(e.target.value)} required={true}/>
                         </label>
                         <label>
                             {t('household families')}
-                            <input type='number' required={true}/>
+                            <input type='number' value={hhfamilies} onChange={(e) => setHhfamilies(e.target.value)} required={true}/>
                         </label>
                         <label>
                             {t('household zipcode')}
-                            <input type='text' required={true}/>
+                            <input type='text' value={zipcode} onChange={(e) => setZipcode(e.target.value)} required={true}/>
                         </label>
                         <label>
                             {t('household spousal status')}
-                            <select required={true}>
+                            <select value={mixedstatus} onChange={(e) => setMixedstatus(e.target.value)} required={true}>
                                 <option>Yes</option>
                                 <option>No</option>
                                 <option>Maybe</option>
