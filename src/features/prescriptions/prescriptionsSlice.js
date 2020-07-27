@@ -5,8 +5,8 @@ const prescriptionsSlice = createSlice({
     initialState: [],
     reducers: {
         setPrescriptions(state, action) {
-            const { rxs } = action.payload
-            state.push(...rxs)
+            const { rxes } = action.payload
+            state.push(...rxes)
         },
         updatePrescription(state, action) {
             const { id, prescription } = action.payload

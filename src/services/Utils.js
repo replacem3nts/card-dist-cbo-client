@@ -1,5 +1,6 @@
 const BACKEND_CBOS = 'http://localhost:3001/api/v1/cbos'
 const BACKEND_PRESCRIBERS = 'http://localhost:3001/api/v1/prescribers'
+const BACKEND_RX = 'http://localhost:3001/api/v1/rxs'
 
 export const fetchLogin = (userInfo) => {
     return fetch(BACKEND_CBOS+'/login', {
@@ -52,4 +53,16 @@ export const fetchConstants = () => {
         return fetch(BACKEND_CBOS+`/constants`)
             .then(r => r.json())
 
+}
+
+export const fetchFirstRxUpdate = (rx, survey, token) => {
+    return fetch(BACKEND_RX+'/cbos', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({rx, survey})
+    })
+        .then(r => r.json())
 }

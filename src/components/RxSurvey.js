@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next';
+import { fetchFirstRxUpdate } from '../services/Utils';
 
 let mapState = (state) => {
     return {
@@ -44,7 +45,10 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
         e.preventDefault()
         let newRx = { hcId, prescriberId, tel, language, notes}
         let newSurvey = { age, gender, hhsize, hhfamilies, zipcode, mixedstatus, covidImps, drVisits, funds, hhmembers}
-        console.log(newSurvey)
+        fetchFirstRxUpdate(newRx, newSurvey, localStorage.token)
+            .then(response => {
+                console.log(response)
+            })
     }
 
 
