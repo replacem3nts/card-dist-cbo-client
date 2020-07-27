@@ -125,13 +125,15 @@ tr:nth-child(even) {
   justify-content: space-around;
 }
 
-.button-styled-link {
+.large-button {
   text-decoration: none;
   padding: .85rem;
-  color: #1028A7;
+  background-color: #28377E;
+  color: #FFFFFF;
   font-size: 1.4rem;
   font-weight: 700;
-  border: 3px solid #1028A7;
+  border: 3px solid #28377E;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
 }
 
 .distributed-body {

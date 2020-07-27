@@ -57,8 +57,8 @@ const FilledPrescritionsList = ({ prescriptions }) => {
             </header>
             <div className='distributed-body'>
                 <h3>Number Available to be Filled: {availNum}</h3>
-                <Link className='button-styled-link' to={`/fillrx`}>Assign New Rx</Link>
-                <Link className='button-styled-link' to='/prescribers'>Manage Prescribers</Link>
+                <Link className='large-button' to={`/fillrx`}>Assign New Rx</Link>
+                <Link className='large-button' to='/prescribers'>Manage Prescribers</Link>
             </div>
         </section>
         </>

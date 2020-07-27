@@ -20,17 +20,33 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
     const [language, setLanguage] = useState('English')
     const [prescriberId, setPrescriberId] = useState('')
     const [hcId, setHcId] = useState('')
+    const [notes, setNotes] = useState('')
     
     // Below are the fields needed to create an instance of the 'Survey' model
     const [age, setAge] = useState('')
     const [gender, setGender] = useState('Male')
-    const [hhsize, setHhsize] = useState('')
+    const [hhsize, setHhsize] = useState(0)
     const [hhfamilies, setHhfamilies] = useState('')
     const [zipcode, setZipcode] = useState('')
     const [mixedstatus, setMixedstatus] = useState('Yes')
     const [covidImps, setCovidImps] = useState([])
     const [drVisits, setDrVisits] = useState([])
     const [funds, setFunds] = useState([])
+    const [hhmembers, setHhmembers] = useState([
+        {age: '', gender: 'Male'},
+        {age: '', gender: 'Male'}
+    ])
+
+
+    // Below are the form submission helpers
+
+    let handleSubmit = (e) => {
+        e.preventDefault()
+        let newRx = { hcId, prescriberId, tel, language, notes}
+        let newSurvey = { age, gender, hhsize, hhfamilies, zipcode, mixedstatus, covidImps, drVisits, funds, hhmembers}
+        console.log(newSurvey)
+    }
+
 
     // Below create the select options for prescribers and healthcare institutions
     const prescriberArr = prescribers.map(presc => {
@@ -56,7 +72,7 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
         return (
             <label key={ci.id}>
                 <input type='checkbox' checked={covidImps.find(covimp => covimp === ci.id)} value={ci.id} onClick={(e) => handleCovid(e)}/>
-                {ci.kind}
+                {t(`${ci.kind}`)}
             </label>
             )
         })
@@ -74,7 +90,7 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
         return (
             <label key={dv.id}>
                 <input type='checkbox' checked={drVisits.find(drVisit => drVisit === dv.id)} value={dv.id} onClick={(e) => handleDoctor(e)}/>
-                {dv.kind}
+                {t(`${dv.kind}`)}
             </label>
             )
         })
@@ -97,15 +113,62 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
             )
         })
 
+    // Below household members inputs and form controls
+
+    let handleHhmemberAge = (e) => {
+        let { name, value } = e.target
+        let newHhmembers = [...hhmembers]
+        newHhmembers[name].age = value
+        setHhmembers(newHhmembers)
+    }
+
+    let handleHhmemberGender = (e) => {
+        let { name, value } = e.target
+        let newHhmembers = [...hhmembers]
+        newHhmembers[name].gender = value
+        setHhmembers(newHhmembers)
+    }
+
+    let handleAddMember = (e) => {
+        e.preventDefault()
+        setHhmembers(hhmembers => [...hhmembers, {age: '', gender: 'Male'}])
+    }
+
+    let handleRemoveMember = (e) => {
+        e.preventDefault()
+        let newHhmembers = [...hhmembers]
+        newHhmembers.pop()
+        setHhmembers(newHhmembers)
+    }
+
+    const hhmembersArr = hhmembers.map((hhmember, i) => {
+        return (
+            <div key={i} style={{margin: 0.25+'rem'}}>
+                <label>
+                    {`${i+1}. `}{t('age')}
+                    <input type='number' name={i} value={hhmember.age} onChange={(e) => handleHhmemberAge(e)} required={true}/>
+                </label>
+                <label>
+                    {t('gender')}
+                    <select name={i} value={hhmember.gender} onChange={(e) => handleHhmemberGender(e)}>
+                        <option>{t('Male')}</option>
+                        <option>{t('Female')}</option>
+                        <option>{t('Prefer Not to Say')}</option>
+                    </select>
+                </label>
+            </div>
+        )
+    })
+
+
     return (
         <article className='survey-container'>
-            {console.log(age)}
             <header>
                 <h2>4-CT Card Prescription Request</h2>
                 <p>{t('survey instructions')}</p> 
             </header>
             <section>
-                <form>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <label>
                         <h4>{t('select prescriber')}</h4>
                         <select defaultValue={'DEFAULT'} onChange={(e) => setPrescriberId(e.target.value)} required={true}>
@@ -134,9 +197,9 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
                         <label>
                             {t('applicant gender')}
                             <select required={true} value={gender} onChange={(e) => setGender(e.target.value)}>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Prefer Not To Say</option>
+                                <option>{t('Male')}</option>
+                                <option>{t('Female')}</option>
+                                <option>{t('Prefer Not to Say')}</option>
                             </select>
                         </label>
                         <label>
@@ -167,9 +230,9 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
                         <label>
                             {t('household spousal status')}
                             <select value={mixedstatus} onChange={(e) => setMixedstatus(e.target.value)} required={true}>
-                                <option>Yes</option>
-                                <option>No</option>
-                                <option>Maybe</option>
+                                <option>{t('yes')}</option>
+                                <option>{t('no')}</option>
+                                <option>{t('maybe')}</option>
                             </select>
                         </label>
                     </div><br/>
@@ -179,17 +242,29 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
                         {t('use of funds question')}
                         {funduseArr}
                     </div><br/>
-                    <h3>4. COVID-19 Impacts:</h3>
+                    <h3>{t('covid impacts')}</h3>
                     <div className='survey-section'>
-                        {'Has anyone in the household experienced any of the following impacts of COVID-19?  '}<br/>
+                        {t('covid impacts question')}<br/>
                         {covidimpactArr}
                     </div><br/>
-                    <h3>5. Healthcare Interactions:</h3>
+                    <h3>{t('doctor visits')}</h3>
                     <div className='survey-section'>
-                        {'Where do you/your family most often see a doctor now?  '}<br/>
+                        {t('doctor visits question')}<br/>
                         {doctorvisitArr}
-                    </div>
-                    <input type='submit' value='Submit'/>
+                    </div><br/>
+                    <h3>{t('household members')}</h3>
+                    <div className='survey-section'>
+                        {t('household members description')}
+                        <button onClick={(e) => handleAddMember(e)}>{t('add member')}</button>
+                        <button onClick={(e) => handleRemoveMember(e)}>{t('remove member')}</button><br/><br/>
+                        {hhmembersArr}<br/><br/>
+                    </div><br/>
+                    <h3>{t('notes')}</h3>
+                    <p>{t('notes description')}</p>
+                    <div className='survey-section'>
+                        <textarea rows={8} cols={100} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t('notes placeholder')}/>
+                    </div><br/>
+                    <input type='submit' value={t('submit')}/>
                 </form>
             </section>
         </article>
