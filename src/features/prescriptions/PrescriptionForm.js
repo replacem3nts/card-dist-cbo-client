@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next';
-import { fetchFirstRxUpdate, fetchSurveyCreate } from '../services/Utils';
+import { fetchFirstRxUpdate, fetchSurveyCreate } from '../../services/Utils';
+import { updatePrescription } from './PrescriptionsSlice';
+import { useHistory } from 'react-router-dom';
 
 let mapState = (state) => {
     return {
@@ -13,8 +15,11 @@ let mapState = (state) => {
     }
 }
 
-const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) => {
+let mapDispatch = { updatePrescription }
+
+const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, updatePrescription }) => {
     const { t } = useTranslation()
+    const history = useHistory()
 
     // Below are the inputs needed to update an instance of the 'Rx' model
     const [tel, setTel] = useState('')
@@ -48,11 +53,17 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
         let surveyRels = { covidImps, drVisits, funds, hhmembers }
         fetchSurveyCreate(newSurvey, surveyRels, localStorage.token)
             .then(response => {
-                console.log(response)
-            })
-        fetchFirstRxUpdate(rxUpdate, localStorage.token)
-            .then(response => {
-                console.log(response)
+                if(!response.message) {
+                    let { rxId } = response
+                    fetchFirstRxUpdate(rxId, rxUpdate, localStorage.token)
+                        .then(response => {
+                            if(!response.message) {
+                                console.log(response)
+                                updatePrescription(response)
+                                history.push('/')
+                            }
+                        })
+                }
             })
     }
 
@@ -280,4 +291,4 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
     )
 }
 
-export default connect(mapState)(RxSurvey)
+export default connect(mapState, mapDispatch)(RxSurvey)

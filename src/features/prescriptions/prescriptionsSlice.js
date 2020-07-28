@@ -9,9 +9,10 @@ const prescriptionsSlice = createSlice({
             state.push(...rxes)
         },
         updatePrescription(state, action) {
-            const { id, prescription } = action.payload
-            let toUpdateInd = state.findIndex(prescription => prescription.id === id)
-            state.splice(toUpdateInd, 1, prescription)
+            const { rx } = action.payload
+            let toUpdateInd = state.findIndex(presc => presc.id === rx.id)
+            state.splice(toUpdateInd, 1)
+            state.push(rx)
         }
     }
 })

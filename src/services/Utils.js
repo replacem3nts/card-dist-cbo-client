@@ -75,7 +75,7 @@ export const fetchFirstRxUpdate = (rxId, rx, token) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(rxId, rx)
+        body: JSON.stringify({rxId, rx})
     })
         .then(r => r.json())
 }

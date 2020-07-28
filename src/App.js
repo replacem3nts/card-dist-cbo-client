@@ -11,7 +11,7 @@ import PrescribersList from './features/prescribers/PrescribersList';
 import { setPrescriptions } from './features/prescriptions/PrescriptionsSlice';
 import FilledPrescritionsList from './features/prescriptions/FilledPrescritionsList';
 import { setHcs } from './features/hcs/HcSlice';
-import RxSurvey from './components/RxSurvey';
+import PrescriptionForm from './features/prescriptions/PrescriptionForm';
 import { setCovidImpacts } from './features/covidimpacts/CovidImpactsSlice';
 import { setDoctorVisits } from './features/doctorvisits/DoctorVisitsSlice';
 import { setFundUses } from './features/funduses/FundUsesSlice';
@@ -62,7 +62,7 @@ class App extends Component {
   
   renderFillRx = () => {
     if(localStorage.token) {
-      return <RxSurvey/>
+      return <PrescriptionForm/>
     } 
   }
 
