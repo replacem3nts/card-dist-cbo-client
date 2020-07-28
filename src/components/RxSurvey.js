@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next';
-import { fetchFirstRxUpdate } from '../services/Utils';
+import { fetchFirstRxUpdate, fetchSurveyCreate } from '../services/Utils';
 
 let mapState = (state) => {
     return {
@@ -43,9 +43,14 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses }) =>
 
     let handleSubmit = (e) => {
         e.preventDefault()
-        let newRx = { hcId, prescriberId, tel, language, notes}
-        let newSurvey = { age, gender, hhsize, hhfamilies, zipcode, mixedstatus, covidImps, drVisits, funds, hhmembers}
-        fetchFirstRxUpdate(newRx, newSurvey, localStorage.token)
+        let rxUpdate = { hcId, prescriberId, tel, language, notes}
+        let newSurvey = { age, gender, hhsize, hhfamilies, zipcode, mixedstatus }
+        let surveyRels = { covidImps, drVisits, funds, hhmembers }
+        fetchSurveyCreate(newSurvey, surveyRels, localStorage.token)
+            .then(response => {
+                console.log(response)
+            })
+        fetchFirstRxUpdate(rxUpdate, localStorage.token)
             .then(response => {
                 console.log(response)
             })
