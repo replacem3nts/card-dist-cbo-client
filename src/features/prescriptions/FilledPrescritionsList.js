@@ -39,8 +39,8 @@ const FilledPrescritionsList = ({ prescriptions }) => {
                         <th>Presc.</th>
                         <th>Presc. #</th>
                         <th>Amount</th>
-                        <th>Appt. Date</th>
-                        <th>Appt. Time</th>
+                        <th>Appt.</th>
+                        <th>Card Serial</th>
                         <th>Picked Up</th>
                         <th>Loaded</th>
                         <th></th>

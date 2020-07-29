@@ -23,7 +23,7 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
 
     // Below are the inputs needed to update an instance of the 'Rx' model
     const [tel, setTel] = useState('')
-    const [language, setLanguage] = useState('English')
+    const [language, setLanguage] = useState('EN')
     const [prescriberId, setPrescriberId] = useState('')
     const [hcId, setHcId] = useState('')
     const [notes, setNotes] = useState('')
@@ -58,7 +58,6 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
                     fetchFirstRxUpdate(rxId, rxUpdate, localStorage.token)
                         .then(response => {
                             if(!response.message) {
-                                console.log(response)
                                 updatePrescription(response)
                                 history.push('/')
                             }
@@ -225,11 +224,11 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
                         <label>
                             {t('applicant language')}
                             <select value={language} onChange={(e) => setLanguage(e.target.value)} required={true}>
-                                <option>English</option>
-                                <option>Spanish</option>
-                                <option>Portuguese</option>
-                                <option>French</option>
-                                <option>Arabic</option>
+                                <option value='EN'>English</option>
+                                <option value='SP'>Spanish</option>
+                                <option value='PT'>Portuguese</option>
+                                <option value='FR'>French</option>
+                                <option value='AR'>Arabic</option>
                             </select>
                         </label>
                     </div><br/>

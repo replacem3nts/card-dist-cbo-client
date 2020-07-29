@@ -15,6 +15,7 @@ import PrescriptionForm from './features/prescriptions/PrescriptionForm';
 import { setCovidImpacts } from './features/covidimpacts/CovidImpactsSlice';
 import { setDoctorVisits } from './features/doctorvisits/DoctorVisitsSlice';
 import { setFundUses } from './features/funduses/FundUsesSlice';
+import EditPrescription from './features/prescriptions/EditPrescription';
 
 class App extends Component {
 
@@ -64,6 +65,16 @@ class App extends Component {
     if(localStorage.token) {
       return <PrescriptionForm/>
     } 
+  }
+  
+  renderRx = (routerProps) => {
+    let {slug} = routerProps.match.params
+    let foundRx = this.props.prescriptions.find(rx => rx.id === parseInt(slug, 10))
+    if(foundRx && localStorage.token) {
+      return <EditPrescription prescription={...foundRx}/>
+    } else {
+      
+    }
   }
 
   render() {
