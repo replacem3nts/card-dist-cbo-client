@@ -38,12 +38,12 @@ const FilledPrescritionsList = ({ prescriptions }) => {
                         <th>Lang.</th>
                         <th>Presc.</th>
                         <th>Presc. #</th>
+                        <th>Presc. Email</th>
                         <th>Amount</th>
                         <th>Appt.</th>
                         <th>Card Serial</th>
                         <th>Picked Up</th>
                         <th>Loaded</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

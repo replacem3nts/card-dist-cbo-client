@@ -71,9 +71,9 @@ class App extends Component {
     let {slug} = routerProps.match.params
     let foundRx = this.props.prescriptions.find(rx => rx.id === parseInt(slug, 10))
     if(foundRx && localStorage.token) {
-      return <EditPrescription prescription={...foundRx}/>
+      return <EditPrescription prescription={foundRx}/>
     } else {
-      
+     this.props.history.push('/') 
     }
   }
 
@@ -89,6 +89,7 @@ class App extends Component {
             <Route path='/' exact render={this.renderHome}/>
             <Route path='/prescribers' exact render={this.renderPrescribers}/>
             <Route path='/fillrx' exact render={this.renderFillRx}/>
+            <Route path='/rx/:slug' exact render={this.renderRx}/>
           </Switch>
         </main>
       </div>
