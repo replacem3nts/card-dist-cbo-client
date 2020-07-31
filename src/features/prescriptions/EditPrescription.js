@@ -11,16 +11,18 @@ const mapState = (state) => {
 
 const EditPrescription = ({ prescription, prescribers, hcs }) => {
     const { t } = useTranslation()
-    const initialPresc = prescribers.filter(presc => presc.email === prescription.prescriberemail)
-    const initialHc = hcs.filter(hc => hc.name === prescription.hcname)
+    const initialPresc = prescribers.find(presc => presc.email === prescription.prescriberemail)
+    const initialHc = hcs.find(hc => hc.name === prescription.hcname)
 
+    const [prescriberId, setPrescriberId] = useState(initialPresc.id)
+    const [hcId, setHcId] = useState(initialHc.id)
     const [tel, setTel] = useState(prescription.clienttel)
     const [language, setLanguage] = useState(prescription.language)
-    const [prescriberId, setPrescriberId] = useState(initialPresc.id)
-    const [prescriberName, setPrescriberName] = useState(prescription.prescribername)
-    const [hcId, setHcId] = useState(initialHc.id)
-    const [hcName, setHcName] = useState(prescription.hcname)
     const [notes, setNotes] = useState(prescription.notes)
+
+    const [prescriberName, setPrescriberName] = useState(prescription.prescribername)
+    const [hcName, setHcName] = useState(prescription.hcname)
+
     const [edit, setEdit] = useState(false)
 
     const prescriberArr = prescribers.map(presc => {
@@ -40,7 +42,34 @@ const EditPrescription = ({ prescription, prescribers, hcs }) => {
     return (
         <section className='survey-section'>
             {edit ?
-            null
+            <form>
+                <label>
+                    <h4>{t('select prescriber')}</h4>
+                    <select value={prescriberId} onChange={(e) => setPrescriberId(e.target.value)}>
+                        {prescriberArr}
+                    </select>
+                </label>
+                <label>
+                    <h4>{t('select health center')}</h4>
+                    <select value={hcId} onChange={(e) => setHcId(e.target.value)}>
+                        {hcArr}
+                    </select>
+                </label>
+                <label>
+                    {t('applicant phone')}
+                    <input type='tel' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={tel} onChange={(e) => setTel(e.target.value)}/>
+                </label>
+                <label>
+                    {t('applicant language')}
+                    <select value={language} onChange={(e) => setLanguage(e.target.value)} required={true}>
+                        <option value='EN'>English</option>
+                        <option value='SP'>Spanish</option>
+                        <option value='PT'>Portuguese</option>
+                        <option value='FR'>French</option>
+                        <option value='AR'>Arabic</option>
+                    </select>
+                </label>
+            </form>
             :
             <>
             <div>
