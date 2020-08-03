@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Prescriber from './Prescriber'
 import EditPrescriberForm from './EditPrescriberForm'
+import { Link } from 'react-router-dom'
 
 
 let mapState = (state) => {
@@ -22,6 +23,7 @@ const PrescribersList = ({prescribers}) => {
 
     
     let handleEdit = (id) => {
+        console.log('hello')
         let presc = prescribers.find(presc => presc.id === id)
         setPrescToEdit(presc)
         setDispForm(dispForm => !dispForm)
@@ -30,15 +32,18 @@ const PrescribersList = ({prescribers}) => {
     let handleEditReset = () => {
         setPrescToEdit(blankPresc)
         setDispForm(dispForm => !dispForm)
-    }
+    } 
 
     const prescArray = prescribers.map(prescriber => {
-        return <Prescriber key={prescriber.id} {...prescriber} edit={handleEdit}/>
+        return <Prescriber key={prescriber.id} {...prescriber} onClick={() => handleEdit(prescriber.id)}/>
     })
 
     return (
         <article>
-            <section>
+            <section className='button-break'>
+                <Link to='/' className='small-button'>Back</Link>
+            </section>
+            <section className='rx-container'>
                 <table>
                     <thead>
                         <tr>
@@ -47,7 +52,6 @@ const PrescribersList = ({prescribers}) => {
                             <th>Telephone</th>
                             <th>Email</th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,17 +59,20 @@ const PrescribersList = ({prescribers}) => {
                     </tbody>
                 </table>
             </section>
-            <section>
-                {dispForm 
-                ?
-                <>
-                    <EditPrescriberForm prescriber={prescToEdit} reset={handleEditReset}/>
-                    <button onClick={handleEditReset}>Cancel</button>
-                </>
+            <section className='button-break'>
+                {dispForm ? 
+                <button className='small-button' onClick={handleEditReset}>Cancel</button>
                 :
-                    <button onClick={() => setDispForm(dispForm => !dispForm)}>Add New Prescriber</button>
+                <button className='small-button' onClick={() => setDispForm(dispForm => !dispForm)}>Add New Prescriber</button>
                 }
             </section>
+            {dispForm ?
+                <section className='rx-container'>
+                    <EditPrescriberForm prescriber={prescToEdit} reset={handleEditReset}/>
+                </section>
+                :
+                null
+            }
         </article>
     )
 }

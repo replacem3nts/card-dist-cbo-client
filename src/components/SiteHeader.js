@@ -43,7 +43,7 @@ const SiteHeader = ({ cboName, removeCbo }) => {
             :
             <h3>{t('Welcome!')}</h3>
             }
-            <div style={{width: '30%'}}>
+            <div className='right-header'>
                 <Switch
                     checked={eng}
                     onChange={handleChange}
@@ -87,7 +87,11 @@ const SiteHeader = ({ cboName, removeCbo }) => {
                         </div>
                     }
                 />
-                <button onClick={(e) => handleLogout(e)} >Logout</button>
+                {localStorage.token ? 
+                <button className='small-button' onClick={(e) => handleLogout(e)} >Logout</button>
+                :
+                null
+                }
             </div>
         </div>
     )

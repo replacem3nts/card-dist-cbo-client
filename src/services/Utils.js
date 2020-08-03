@@ -68,7 +68,7 @@ export const fetchSurveyCreate = (survey, surveyrels, token) => {
         .then(r => r.json())
 }
 
-export const fetchFirstRxUpdate = (rxId, rx, token) => {
+export const fetchRxUpdate = (rxId, rx, token) => {
     return fetch(BACKEND_RX+'/cbos', {
         method: 'PATCH',
         headers: {

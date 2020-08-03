@@ -2,6 +2,7 @@ table {
   width: 95%;
   max-height: 75%;
   border-collapse: collapse;
+  margin-bottom: 3rem;
 }
 
 thead {
@@ -33,7 +34,7 @@ td {
 
 tr:hover {
   border: 3px solid #1028A7;
-  font-weight: 800;
+  font-style: strong;
 }
 
 tr:nth-child(odd) {
@@ -62,6 +63,13 @@ tr:nth-child(even) {
 .App-header {
   height: 15vh;
   width: 95vw;
+}
+
+.right-header { 
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .App-header hr {
@@ -137,7 +145,7 @@ tr:nth-child(even) {
   color: #FFFFFF;
   font-size: 1.4rem;
   font-weight: 700;
-  border: 3px solid #28377E;
+  border: 4px solid #5067B0;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
 }
 
@@ -166,14 +174,40 @@ tr:nth-child(even) {
   padding-bottom: 2rem;
 }
 
+.survey-header {
+  width: 60%;
+  align-self: center;
+  color: #28377E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 1.15rem;
+}
+.survey-header > h2 {
+  font-size: 2.25rem;
+  font-style: normal;
+  color: #ffffff;
+  text-shadow: 3px 3px 4px #28377E;
+  background-color: #5067B0;
+  border: 5px solid #28377E;
+  padding:  1.5rem;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.survey-header > span {
+  width: 85%;
+  text-align: left;
+}
+
 .survey-container section {
   width: 85%;
   align-items: center;
 }
 
 .survey-section {
-  background-color: #FFFFFF;
-  border: 3px solid #1028A7;
+  border: 2px solid #1028A7;
   border-radius: 5px;
   padding: 0.75rem;
   margin-top: 1rem;
@@ -185,6 +219,63 @@ tr:nth-child(even) {
   justify-content: space-between;
 }
 
-.survey-section label {
+.rx-container {
+  background-color: #FFFFFF;
+  border: 3px solid #1028A7;
+  border-radius: 5px;
+  width: 90vw;
+  height: 30vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: ;
+  overflow: auto;
+  padding: 1.5rem;
+}
+
+.rx-detail {
+  border: 2px solid #1028A7;
+  border-radius: 5px;
+  padding: 0.5rem;
   margin: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.rx-detail > label {
+  font-weight: 800;
+  margin: 0.75rem;
+}
+
+.rx-detail span, input, select {
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.button-break {
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.small-button {
+  background-color: #28377E;
+  color: #FFFFFF;
+  border: 3px solid #5067B0;
+  text-decoration: none;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
 }

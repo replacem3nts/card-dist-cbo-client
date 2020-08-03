@@ -22,7 +22,6 @@ const Prescriber = ({id, firstname, lastname, tel, email, edit, deletePrescriber
             <td>{lastname}</td>
             <td>{tel}</td>
             <td>{email}</td>
-            <td><button onClick={() => edit(id)}>Edit</button></td>
             <td><button onClick={handleDelete} >Delete</button></td>
         </tr>
     )

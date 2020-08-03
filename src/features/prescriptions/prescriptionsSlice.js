@@ -11,8 +11,7 @@ const prescriptionsSlice = createSlice({
         updatePrescription(state, action) {
             const { rx } = action.payload
             let toUpdateInd = state.findIndex(presc => presc.id === rx.id)
-            state.splice(toUpdateInd, 1)
-            state.push(rx)
+            state.splice(toUpdateInd, 1, rx)
         }
     }
 })

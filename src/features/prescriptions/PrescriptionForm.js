@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useTranslation } from 'react-i18next';
-import { fetchFirstRxUpdate, fetchSurveyCreate } from '../../services/Utils';
+import { fetchRxUpdate, fetchSurveyCreate } from '../../services/Utils';
 import { updatePrescription } from './PrescriptionsSlice';
 import { useHistory } from 'react-router-dom';
 
@@ -55,7 +55,7 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
             .then(response => {
                 if(!response.message) {
                     let { rxId } = response
-                    fetchFirstRxUpdate(rxId, rxUpdate, localStorage.token)
+                    fetchRxUpdate(rxId, rxUpdate, localStorage.token)
                         .then(response => {
                             if(!response.message) {
                                 updatePrescription(response)
@@ -182,10 +182,10 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
 
     return (
         <article className='survey-container'>
-            <header>
+            <header className='survey-header'>
                 <h2>4-CT Card Prescription Request</h2>
-                <p>{t('survey instructions')}</p> 
-            </header>
+                <span>{t('survey instructions')}</span> 
+            </header><br/><br/>
             <section>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <label>
@@ -202,7 +202,7 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
                             {hcArr}
                         </select>
                     </label><br/><br/>
-                        <h3>{t('applicant info')}</h3>
+                        <h3>1. {t('applicant info')}</h3>
                         <p>{t('applicant description')}</p>
                     <div className='survey-section'>
                         <label>
@@ -232,7 +232,7 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
                             </select>
                         </label>
                     </div><br/>
-                    <h3>{t('household info')}</h3>
+                    <h3>2. {t('household info')}</h3>
                     <div className='survey-section'>
                         <label>
                             {t('household size')}
@@ -255,30 +255,30 @@ const RxSurvey = ({ prescribers, hcs, covidimpacts, doctorvisits, funduses, upda
                             </select>
                         </label>
                     </div><br/>
-                    <h3>{t('use of funds')}</h3>
+                    <h3>3. {t('use of funds')}</h3>
                     <p>{t('use of funds disclaimer')}</p>
                     <div className='survey-section'>
                         {t('use of funds question')}
                         {funduseArr}
                     </div><br/>
-                    <h3>{t('covid impacts')}</h3>
+                    <h3>4. {t('covid impacts')}</h3>
                     <div className='survey-section'>
                         {t('covid impacts question')}<br/>
                         {covidimpactArr}
                     </div><br/>
-                    <h3>{t('doctor visits')}</h3>
+                    <h3>5. {t('doctor visits')}</h3>
                     <div className='survey-section'>
                         {t('doctor visits question')}<br/>
                         {doctorvisitArr}
                     </div><br/>
-                    <h3>{t('household members')}</h3>
+                    <h3>6. {t('household members')}</h3>
                     <div className='survey-section'>
                         {t('household members description')}
                         <button onClick={(e) => handleAddMember(e)}>{t('add member')}</button>
                         <button onClick={(e) => handleRemoveMember(e)}>{t('remove member')}</button><br/><br/>
                         {hhmembersArr}<br/><br/>
                     </div><br/>
-                    <h3>{t('notes')}</h3>
+                    <h3>7. {t('notes')}</h3>
                     <p>{t('notes description')}</p>
                     <div className='survey-section'>
                         <textarea rows={8} cols={100} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t('notes placeholder')}/>
