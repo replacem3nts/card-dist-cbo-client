@@ -33,12 +33,11 @@ const FilledPrescritionsList = ({ prescriptions }) => {
             <table>
                 <thead>
                     <tr>
+                        <th>Rx Code</th>
                         <th>Org.</th>
                         <th>Client Tel.</th>
                         <th>Lang.</th>
                         <th>Presc.</th>
-                        <th>Presc. #</th>
-                        <th>Presc. Email</th>
                         <th>Amount</th>
                         <th>Appt.</th>
                         <th>Card Serial</th>

@@ -40,78 +40,69 @@ const EditPrescription = ({ prescription, prescribers, hcs }) => {
     }
 
     return (
-        <section className='survey-section'>
-            {edit ?
-            <form>
-                <label>
-                    <h4>{t('select prescriber')}</h4>
-                    <select value={prescriberId} onChange={(e) => setPrescriberId(e.target.value)}>
-                        {prescriberArr}
-                    </select>
-                </label>
-                <label>
-                    <h4>{t('select health center')}</h4>
-                    <select value={hcId} onChange={(e) => setHcId(e.target.value)}>
-                        {hcArr}
-                    </select>
-                </label>
-                <label>
-                    {t('applicant phone')}
-                    <input type='tel' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={tel} onChange={(e) => setTel(e.target.value)}/>
-                </label>
-                <label>
-                    {t('applicant language')}
-                    <select value={language} onChange={(e) => setLanguage(e.target.value)} required={true}>
-                        <option value='EN'>English</option>
-                        <option value='SP'>Spanish</option>
-                        <option value='PT'>Portuguese</option>
-                        <option value='FR'>French</option>
-                        <option value='AR'>Arabic</option>
-                    </select>
-                </label>
-            </form>
-            :
-            <>
-            <div>
-                <h4>Prescriber Name:</h4>
-                <p>{prescriberName}</p>
-            </div>
-            <div>
-                <h4>Health Care Institution Name:</h4>
-                <p>{hcName}</p>
-            </div>
-            <div>
-                <h4>Client Phone:</h4>
-                <p>{tel}</p>
-            </div>
-                <h4>Language:</h4>
-                <p>{language}</p>
-            <div>
-                <h4>Amount:</h4>
-                <p>{prescription.amount}</p>
-            </div>
-            <div>
-                <h4>Appt:</h4>
-                <p>{prescription.appt ? prescription.appt : '-'}</p>
-            </div>
-                <h4>cardserial:</h4>
-                <p>{prescription.cardserial ? prescription.cardserial : '-'}</p>
-            <div>
-                <h4>Picked Up:</h4>
-                <p>{prescription.pickedup ? t('yes') : t('no')}</p>
-            </div>
-            <div>
-                <h4>Loaded:</h4>
-                <p>{prescription.loaded ? t('yes') : t('no')}</p>
-            </div>
-            <div>
-                <h4>Notes:</h4>
-                <p>{notes ? notes : '-'}</p>
-            </div>
-                <button onClick={handleEditClick}>Edit</button>
-            </>
-            }
-        </section>
+        <article className='survey-container'>
+            <section>
+                <div className='survey-section'>
+                    <label>Prescriber Name:  <span>{prescriberName}</span></label>
+                </div>
+                <div className='survey-section'>
+                    <label>Health Care Institution: <span>{hcName}</span></label>
+                </div>
+                <div className='survey-section'>
+                    <label>Client Phone: <span>{tel}</span></label>
+                    <label>Language: <span>{language}</span></label>
+                </div>
+                <div className='survey-section'>
+                    <label>Amount: <span>{prescription.amount}</span></label>
+                    <label>Appt: <span>{prescription.appt ? prescription.appt : '-'}</span></label>
+                    <label>cardserial: <span>{prescription.cardserial ? prescription.cardserial : '-'}</span></label>
+                    <label>Picked Up: <span>{prescription.pickedup ? t('yes') : t('no')}</span></label>
+                    <label>Loaded: <span>{prescription.loaded ? t('yes') : t('no')}</span></label>
+                </div>
+                <div className='survey-section'>
+                    <label>Notes: <span>{notes ? notes : '-'}</span></label>
+                </div>
+                    <button onClick={handleEditClick}>Edit</button>
+            </section>
+            <section>
+                {edit ?
+                    <div className='survey-section' >
+                        <form>
+                            <label>
+                                {t('select prescriber')}
+                                <select value={prescriberId} onChange={(e) => setPrescriberId(e.target.value)}>
+                                    {prescriberArr}
+                                </select>
+                            </label><br/><br/>
+                            <label>
+                                {t('select health center')}
+                                <select value={hcId} onChange={(e) => setHcId(e.target.value)}>
+                                    {hcArr}
+                                </select>
+                            </label><br/><br/>
+                            <label>
+                                {t('applicant phone')}
+                                <input type='tel' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={tel} onChange={(e) => setTel(e.target.value)}/>
+                            </label><br/><br/>
+                            <label>
+                                {t('applicant language')}
+                                <select value={language} onChange={(e) => setLanguage(e.target.value)} required={true}>
+                                    <option value='EN'>English</option>
+                                    <option value='SP'>Spanish</option>
+                                    <option value='PT'>Portuguese</option>
+                                    <option value='FR'>French</option>
+                                    <option value='AR'>Arabic</option>
+                                </select>
+                            </label><br/><br/>
+                            {t('notes description')}
+                            <textarea rows={8} cols={100} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t('notes placeholder')}/>
+                        </form>
+                    </div>
+                :
+                null
+                }
+            </section>
+        </article>
     )
 }
 
