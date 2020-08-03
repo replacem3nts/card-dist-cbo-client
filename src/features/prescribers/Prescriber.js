@@ -17,7 +17,7 @@ const Prescriber = ({id, firstname, lastname, tel, email, edit, deletePrescriber
     }
 
     return (
-        <tr>
+        <tr onClick={() => edit(id)}>
             <td>{firstname}</td>
             <td>{lastname}</td>
             <td>{tel}</td>

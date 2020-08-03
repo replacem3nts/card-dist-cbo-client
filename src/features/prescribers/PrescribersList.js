@@ -35,7 +35,7 @@ const PrescribersList = ({prescribers}) => {
     } 
 
     const prescArray = prescribers.map(prescriber => {
-        return <Prescriber key={prescriber.id} {...prescriber} onClick={() => handleEdit(prescriber.id)}/>
+        return <Prescriber key={prescriber.id} {...prescriber} edit={handleEdit}/>
     })
 
     return (
@@ -67,7 +67,7 @@ const PrescribersList = ({prescribers}) => {
                 }
             </section>
             {dispForm ?
-                <section className='rx-container'>
+                <section>
                     <EditPrescriberForm prescriber={prescToEdit} reset={handleEditReset}/>
                 </section>
                 :

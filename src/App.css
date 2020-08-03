@@ -224,12 +224,11 @@ tr:nth-child(even) {
   border: 3px solid #1028A7;
   border-radius: 5px;
   width: 90vw;
-  height: 30vh;
+  max-height: 30vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: ;
   overflow: auto;
   padding: 1.5rem;
 }
@@ -278,4 +277,22 @@ tr:nth-child(even) {
   padding-bottom: 0.2rem;
   font-size: 1.15rem;
   font-weight: 700;
+}
+
+.presc-detail {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  font-weight: 800;
+}
+
+.presc-detail > form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
 }
