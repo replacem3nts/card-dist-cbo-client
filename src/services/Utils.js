@@ -1,7 +1,7 @@
-const BACKEND_CBOS = 'http://localhost:3001/api/v1/cbos'
-const BACKEND_PRESCRIBERS = 'http://localhost:3001/api/v1/prescribers'
-const BACKEND_RX = 'http://localhost:3001/api/v1/rxs'
-const BACKEND_SURVEY = 'http://localhost:3001/api/v1/surveys'
+const BACKEND_CBOS = 'https://card-dist-4ct.herokuapp.com/api/v1/cbos'
+const BACKEND_PRESCRIBERS = 'https://card-dist-4ct.herokuapp.com/api/v1/prescribers'
+const BACKEND_RX = 'https://card-dist-4ct.herokuapp.com/api/v1/rxs'
+const BACKEND_SURVEY = 'https://card-dist-4ct.herokuapp.com/api/v1/surveys'
 
 export const fetchLogin = (userInfo) => {
     return fetch(BACKEND_CBOS+'/login', {
