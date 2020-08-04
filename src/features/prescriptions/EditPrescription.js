@@ -14,7 +14,7 @@ const mapState = (state) => {
 
 const mapDispatch = { updatePrescription }
 
-const EditPrescription = ({ prescription, prescribers, hcs }) => {
+const EditPrescription = ({ prescription, prescribers, hcs, updatePrescription }) => {
     const { t } = useTranslation()
     const history = useHistory()
 
@@ -60,6 +60,7 @@ const EditPrescription = ({ prescription, prescribers, hcs }) => {
         fetchRxUpdate(prescription.id, newRx, localStorage.token)
             .then(response => {
                 if(!response.message) {
+                    console.log(response)
                     updatePrescription(response)
                     history.push('/')
                 }
