@@ -23,9 +23,12 @@ const PrescribersList = ({prescribers}) => {
 
     
     let handleEdit = (id) => {
-        console.log('hello')
-        let presc = prescribers.find(presc => presc.id === id)
-        setPrescToEdit(presc)
+        if(dispForm){
+            setPrescToEdit(blankPresc)
+        } else {
+            let presc = prescribers.find(presc => presc.id === id)
+            setPrescToEdit(presc)
+        }
         setDispForm(dispForm => !dispForm)
     }
 

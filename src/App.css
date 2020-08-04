@@ -186,14 +186,15 @@ tr:nth-child(even) {
   font-size: 1.15rem;
 }
 .survey-header > h2 {
-  font-size: 2.25rem;
-  font-style: normal;
-  color: #ffffff;
-  text-shadow: 3px 3px 4px #28377E;
   background-color: #5067B0;
   border: 5px solid #28377E;
-  padding:  1.5rem;
+  border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  padding:  1.5rem;
+  color: #ffffff;
+  font-style: normal;
+  font-size: 2.25rem;
+  text-shadow: 3px 3px 4px #28377E;
 }
 
 .survey-header > span {
@@ -294,5 +295,4 @@ tr:nth-child(even) {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-
 }
