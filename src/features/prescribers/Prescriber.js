@@ -5,7 +5,7 @@ import { deletePrescriber } from './PrescribersSlice'
 
 let mapDispatch = { deletePrescriber }
 
-const Prescriber = ({id, firstname, lastname, clienttel, email, edit, deletePrescriber}) => {
+const Prescriber = ({id, firstname, lastname, tel, email, edit, deletePrescriber}) => {
 
     let handleDelete = () => {
         fetchDeletePrescriber(id, localStorage.token)
@@ -20,7 +20,7 @@ const Prescriber = ({id, firstname, lastname, clienttel, email, edit, deletePres
         <tr onClick={() => edit(id)}>
             <td>{firstname}</td>
             <td>{lastname}</td>
-            <td>{clienttel}</td>
+            <td>{tel}</td>
             <td>{email}</td>
             <td><button onClick={handleDelete} >Delete</button></td>
         </tr>

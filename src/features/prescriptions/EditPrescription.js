@@ -75,7 +75,7 @@ const EditPrescription = ({ prescription, prescribers, hcs, updatePrescription }
             <section className='rx-container'>
                 <div className='rx-detail'>
                     <label>Rx Code: <span>{prescription.rxcode}</span></label>
-                    <label>Client Phone: <span>{prescription.tel}</span></label>
+                    <label>Client Phone: <span>{prescription.clienttel}</span></label>
                     <label>Language: <span>{prescription.language}</span></label>
                 </div>
                 <div className='rx-detail'>

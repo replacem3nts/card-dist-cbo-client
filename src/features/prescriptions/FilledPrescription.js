@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 
-export const FilledPrescription = ({id, rxcode, hcname, clienttel, language, prescribername, prescriberphone, prescriberemail, amount, appt, cardserial, pickedup, loaded }) => {
+export const FilledPrescription = ({id, rxcode, hcname, clienttel, language, prescribername, amount, appt, cardserial, pickedup, loaded }) => {
     const { t } = useTranslation()
     const history = useHistory()
 
