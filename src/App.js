@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import { withRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import LoginForm from './components/LoginForm';
 import SiteHeader from './components/SiteHeader';
 import { fetchPersistLogin, fetchConstants } from './services/Utils';
 import { setCbo } from './features/cbo/cboSlice'
 import { setPrescribers } from './features/prescribers/PrescribersSlice'
-import { connect } from 'react-redux';
 import PrescribersList from './features/prescribers/PrescribersList';
 import { setPrescriptions } from './features/prescriptions/PrescriptionsSlice';
 import FilledPrescritionsList from './features/prescriptions/FilledPrescritionsList';

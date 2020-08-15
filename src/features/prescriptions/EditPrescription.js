@@ -60,7 +60,6 @@ const EditPrescription = ({ prescription, prescribers, hcs, updatePrescription }
         fetchRxUpdate(prescription.id, newRx, localStorage.token)
             .then(response => {
                 if(!response.message) {
-                    console.log(response)
                     updatePrescription(response)
                     history.push('/')
                 }
